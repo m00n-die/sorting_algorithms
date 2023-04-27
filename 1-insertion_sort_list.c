@@ -3,12 +3,9 @@
 #include "sort.h"
 
 /**
- * swap - Swap two nodes in a listint_t doubly-linked list.
- * 
+ * swap_nodes - swap two nodes in a listint_t doubly-linked list.
  * @head: pointer to the head of the doubly-linked list.
- * 
- * @node1: pointer to the first node to swap.
- * 
+ * @node1: first node to swap.
  * @node2: second node to swap.
  */
 
@@ -28,58 +25,27 @@ void swap_nodes(listint_t **head, listint_t **node1, listint_t *node2)
 }
 
 /**
- * insertion_sort_list - sorts a doubly linked list of integers
- *                          in ascending order using the Insertion sort algorithm
- * 
- * @list: a pointer to the head of the doubly linked list
+ * insertion_sort_list - Sorts a doubly linked list of integers
+ *                       using the insertion sort algorithm.
+ * @list: A pointer to the head of a doubly-linked list of integers.
+ *
+ * Description: Prints the list after each swap.
  */
-
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *i, *insert, *temp;
+	listint_t *i, *inst, *tmp;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	for (i = (*list)->next; i != NULL; i = temp)
+	for (i = (*list)->next; i != NULL; i = tmp)
 	{
-		temp = i->next;
-		insert = i->prev;
-		while (insert != NULL && i->n < insert->n)
+		tmp = i->next;
+		inst = i->prev;
+		while (inst != NULL && i->n < inst->n)
 		{
-			swap_nodes(list, &insert, i);
+			swap_nodes(list, &inst, i);
 			print_list((const listint_t *)*list);
 		}
 	}
-}
-
-/**
- * create_listint - Creates a doubly linked list from an array of integers
- *
- * @array: Array to convert to a doubly linked list
- * @size: Size of the array
- *
- * Return: Pointer to the first element of the created list. NULL on failure
- */
-listint_t *create_listint(const int *array, size_t size)
-{
-    listint_t *list;
-    listint_t *node;
-    int *tmp;
-
-    list = NULL;
-    while (size--)
-    {
-        node = malloc(sizeof(*node));
-        if (!node)
-            return (NULL);
-        tmp = (int *)&node->n;
-        *tmp = array[size];
-        node->next = list;
-        node->prev = NULL;
-        list = node;
-        if (list->next)
-            list->next->prev = list;
-    }
-    return (list);
 }
