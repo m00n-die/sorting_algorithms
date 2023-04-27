@@ -38,7 +38,7 @@ void bubble_sort(int *array, size_t size)
 			{
 				swap(array + i, array + i + 1);
 				print_array(array, size);
-				bubbly = false;
+				bol = false;
 			}
 		}
 		len--;
